@@ -20,8 +20,14 @@
         let input = prompt("Enter X or O");
 
         if(rowIndex >= 0 && rowIndex < rows && colIndex >= 0 && colIndex < columns && input == "X" || input =="O"){
-            board[rowIndex][colIndex]=input;
-            displayBoard();
+            if(board[rowIndex][colIndex] == "X" || board[rowIndex][colIndex] == "O"){
+                console.log("Invalid input. Please X or O in a different index position.");
+            }
+            else{
+                board[rowIndex][colIndex]=input;
+                displayBoard();
+                checkWinner();
+            }
         }
         else{
             console.log("Invalid input. Please re-enter correct row/column index or X or O");
@@ -33,20 +39,20 @@
         for(i=0; i<rows; i++){
             let j=0;
             if(board[i][j] == board[i][j+1] == board[i][j+2]){
-                //Winner
+                console.log("You Win");
             }
         }
         //Checks winner via columns
         for(j=0; j<columns; j++){
             let i=0;
             if(board[i][j] == board[i+1][j] == board[i+2][j]){
-                //Winner
+                console.log("You Win");
             }
         }
         //Checks winner via Diagonal Cross
         let i = 0;
         if(board[i][i] == board[i+1][i+1] == board[i+2][i+2]){
-            //Winner
+            console.log("You Win");
         }
     }
     displayBoard();
