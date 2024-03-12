@@ -3,10 +3,12 @@
     const columns = 3;
     const board = [];
 
-    for (let i=0; i<rows; i++){
-        board[i]=[];
-        for (j=0; j<columns; j++){
-            board[i][j]=[" "];
+    const initializeBoard = () =>{
+        for (let i=0; i<rows; i++){
+            board[i]=[];
+            for (j=0; j<columns; j++){
+                board[i][j]=[" "];
+            }
         }
     }
 
@@ -23,7 +25,7 @@
             if(board[rowIndex][colIndex] == "X" || board[rowIndex][colIndex] == "O"){
                 console.log("Invalid input. Please X or O in a different index position.");
                 displayBoard();
-                checkWinner();
+                updateBoard();
             }
             else{
                 board[rowIndex][colIndex]=input;
@@ -43,6 +45,7 @@
             let j=0;
             if(board[i][j] === board[i][j+1] && board[i][j+2] === board[i][j] && (board[i][j]=== "X" || board[i][j] === "O")){
                 console.log("You Win");
+                resetGame();
             }
         }
         //Checks winner via columns
@@ -50,15 +53,24 @@
             let i=0;
             if(board[i][j] === board[i+1][j] && board[i+2][j] === board[i][j] && (board[i][j]=== "X" || board[i][j] === "O")){
                 console.log("You Win");
+                resetGame();
             }
         }
         //Checks winner via Diagonal Cross
         let i = 0;
         if((board[i][i] === board[i+1][i+1] && board[i+2][i+2] === board[i][i] && (board[i][i]=== "X" || board[i][i] === "O")) ||(board[i][i+2] === board[i+1][i+1] && board[i+2][i] === board[i][i+2] && (board[i][i+2]=== "X" || board[i][i+2] === "O"))){
             console.log("You Win");
+            resetGame();
         }
         updateBoard();
     }
+    const resetGame = () => {
+        initializeBoard();
+        displayBoard();
+        updateBoard();
+    }
+
+    initializeBoard();
     displayBoard();
     updateBoard();
     
